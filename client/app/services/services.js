@@ -2,6 +2,40 @@ angular.module('shortly.services', [])
 
 .factory('Links', function ($http) {
   // Your code here
+
+  var getAll = function (callback) {
+    var cb = callback || function (x) {
+      return x;
+    };
+
+  return $http({
+    method: "get",
+    url: '/api/links'
+  }).then(function (res) {
+    return cb(res.data);
+    //return res.data;
+  }, function (err) {
+      throw err;
+    });
+  };
+
+  var addOne = function (link) {
+    return $http({
+      method: "post",
+      url: '/api/links',
+      data: link
+    }).then(function (res) {
+      return res;
+    }, function (err) {
+      throw err;
+    });
+  };
+
+  return {
+    getAll: getAll,
+    addOne: addOne
+  };
+
 })
 .factory('Auth', function ($http, $location, $window) {
   // Don't touch this Auth service!!!
@@ -11,6 +45,7 @@ angular.module('shortly.services', [])
   // that JWT is then stored in localStorage as 'com.shortly'
   // after you signin/signup open devtools, click resources,
   // then localStorage and you'll see your token from the server
+
   var signin = function (user) {
     return $http({
       method: 'POST',
