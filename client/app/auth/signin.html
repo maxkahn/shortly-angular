@@ -1,9 +1,15 @@
 <div id='signin'>
   <h1>signin</h1>
-  <form name="signinForm" ng-submit='signin()'>
-    <input type='text'ng-model='user.username'>
-    <input type="password" ng-model='user.password'>
-    <button>signin</button>
+  <form novalidate name="signinForm" ng-submit='signin()'>
+    <input name="username" type='text'ng-model='user.username'>
+    <span ng-show="signinForm.username.$error.text">Not a valid username. </span>
+    <input ng-class="{ error : signinForm.password.$error.pattern}" name="password" type="password" ng-model='user.password'
+      maxlength=4 minlength=1 pattern="^[0-9]*$"/>
+    <span ng-show="signinForm.password.$error.pattern">Password must contain only numbers</span>
+    <input type="submit"></input>
   </form>
   <a href="#/signup">Don't have an account? <strong>Signup</strong> ...</a>
 </div>
+
+<!-- I'm not sure how to do this, but in the validation step,
+I could check that the username and password match on the server side -->

@@ -1,6 +1,10 @@
 <div id='container' ng-controller= 'LinksController'>
+  <div class="live-search">
+  <input ng-model="search.title" type="text"/>
+  </div>
     <ul>
-      <li ng-repeat="link in data.links"><a ng-href="{{link.base_url + '/' + link.code}}" +{{link.base_url + link.code}} >{{ link.title + "  Visits:" + link.visits}} </a></li>
+      <li ng-repeat="link in data.links | filter: search | orderBy: '-visits'"><a ng-href="{{link.base_url + '/' + link.code}}" +{{link.base_url + link.code}} >{{ link.title + "  Visits:" + link.visits}} </a>
+      </li>
       <!--code url visits base_url title -->
     </ul>
 </div>

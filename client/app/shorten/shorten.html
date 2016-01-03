@@ -1,7 +1,11 @@
 <div id='container' ng-controller="ShortenController">
 <!-- Your code here -->
-<input name="shorten" type="text" ng-model="url"/>
-<button ng-click="addLink(url)"> </button>
+<form novalidate name="createShort" ng-submit='addLink(url)'>
+<input name="shorten" type="url" ng-model="url"/>
+<span ng-show="createShort.shorten.$error.url"> Email is invalid! </span>
+<input ng-click="addLink(url)" type='submit' value="Submit"/>
+
+</form>
 </div>
 
 
